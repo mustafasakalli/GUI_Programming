@@ -3,24 +3,26 @@ package com.example.mysocialapp;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 public class PostActivity extends AppCompatActivity {
 
-
-
     public static final int CAPTURE_IMAGE = 1;
+
     ImageView img;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
-
-        ImageView img = (ImageView) findViewById(R.id.imageView);
+        img = (ImageView) findViewById(R.id.imageView);
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -31,10 +33,29 @@ public class PostActivity extends AppCompatActivity {
             }
         });
 
-       
+        final EditText txtMsg = (EditText)findViewById(R.id.txtMessage);
+        ImageButton btnOk = (ImageButton) findViewById(R.id.btnOK);
+        btnOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                Bundle bundle = new Bundle();
+                bundle.putCharSequence("msg",txtMsg.getText());
+                bundle.putParcelable("bitmap",((BitmapDrawable)img.getDrawable()).getBitmap());
+                intent.putExtras(bundle);
+                setResult(Activity.RESULT_OK,intent);
+                finish();
+            }
+        });
+        ImageButton btnCancel = (ImageButton) findViewById(R.id.btnCancel);
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setResult(Activity.RESULT_CANCELED);
+                finish();
+            } });
 
-
- }
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -44,4 +65,5 @@ public class PostActivity extends AppCompatActivity {
             img.setImageBitmap(image);
         }
     }
+
 }
