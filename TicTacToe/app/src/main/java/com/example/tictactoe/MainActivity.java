@@ -105,20 +105,50 @@ public class MainActivity extends AppCompatActivity {
 
 
         //check rows
+        win = true;
+        for (int j= 0; j<3 ; j++) {
+            if(board[row][j] != playerValue) {
+                win=false;
+                break;
+
+            }
+
+        }
+        if(win) {
+            return playerValue;
+        }
 
 
 
 
         //check diagonal
+        
+        win = true;
+        for (int z = 0; z<3 ; z++) {
+            if(board[z][z] != playerValue) {
+                win=false;
+                break;
+            }
+
+        }
+        if(win)
+            return playerValue;
+        win = true;
+        for (int z = 0 ,f=2; z<3 && f >=0  ; z++, f--) {
+            if(board[z][f] != playerValue) {
+                win = false;
+                break;
+            }
+        }
+
+        if(win) {
+            return playerValue;
+        }
 
         return -1;
     }
 
-    @Override
-    public boolean onCreateOptionsMenu (Menu menu){
-        getMenuInflater().inflate(R.menu.menu,menu);
-        return super.onCreateOptionsMenu(menu);
-    }
+    
 
 
     void setBoardEnabled(boolean enable ){
@@ -132,8 +162,15 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+    
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
-    public boolean newGame(MenuItem item) {
+    
+	public boolean newGame(MenuItem item) {
         setBoardEnabled(true);
 
         for (int i = 0; i < 3; i++) {
