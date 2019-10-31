@@ -6,4 +6,15 @@
         android:title="New Game"
         android:onClick="newGame"
         app:showAsAction="always" />
+
+    <item
+        android:title="Save Game"
+        android:onClick="saveGame"
+        app:showAsAction="always" />
+
+    <item
+        android:title="Load Game"
+        android:onClick="loadGame"
+        app:showAsAction="always" />
+
 </menu>
