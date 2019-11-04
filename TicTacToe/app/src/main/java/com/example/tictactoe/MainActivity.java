@@ -3,8 +3,9 @@ package com.example.tictactoe;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.PersistableBundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.NonNull;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -184,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putByteArray("board", toArray(board));
         outState.putBoolean("turn", player1Turn);
@@ -260,16 +261,20 @@ public class MainActivity extends AppCompatActivity {
         }
 
         TableLayout table = findViewById(R.id.table);
-        for (int i = 0, i < 3, i++){
+        for (int i = 0; i < 3; i++){
             TableRow row = (TableRow) table.getChildAt(i);
             for (int j = 0; j < 3; j++){
                 Button btn = (Button) row.getChildAt(j);
                 switch (board[i][j]){
-                    case 0: btn.SetText("");
-                    break;
-                    case 1: btn.setText(PLAYER_1_SYMBOL);
+                    case 0:
+                        btn.setText("");
+                        break;
+                    case 1:
+                        btn.setText(PLAYER_1_SYMBOL);
                         break;
                     case 2:
+                        btn.setText(PLAYER_2_SYMBOL);
+						break;
                 }
             }
         }
