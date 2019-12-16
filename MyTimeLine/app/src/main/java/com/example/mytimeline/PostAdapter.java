@@ -28,16 +28,17 @@ public class PostAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     Context context;
 
-    @Override
-    public int getCount() {
-        return posts.size();
-    }
-
     public PostAdapter(List<Post> posts, Context context) {
         this.posts = posts;
         this.context = context;
         inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
     }
+
+    @Override
+    public int getCount() {
+        return posts.size();
+    }
+
 
     @Override
     public Object getItem(int position) {
@@ -73,6 +74,7 @@ public class PostAdapter extends BaseAdapter {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
+
                 Log.e("Firebase","Error in download !!!",e );
             }
         });
